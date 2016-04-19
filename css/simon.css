@@ -1,0 +1,257 @@
+h1 {
+
+	color: #03E003;
+	margin-top: 15px;
+	margin-left: 40px;
+	font-family: 'VT323';
+	font-size: 80px;
+	letter-spacing: 10px;
+	animation: textFlash 5s infinite;
+
+}
+
+@keyframes textFlash {
+
+    25%		{color: #FF0000;}
+    50%  	{color: #0070FF;}
+    75%  	{color: #03E003;}
+    100%  	{color: yellow;}
+
+}
+
+h2 {
+	
+	display: none;
+	margin-top: 5px;
+	margin-right: 40px;
+	float: right;
+	font-family: 'VT323';
+	font-size: 80px;
+	letter-spacing: 10px;
+	color: #03E003;
+
+}
+
+body {
+
+	background-color: #312D2D;
+
+}
+
+#infoWindow {
+	
+	display: none;
+	clear: both;
+	background-color: black;
+	height: 380px;
+	width: 380px;
+	margin: 20px auto;
+	border-radius: 200px 200px 200px 200px;
+	border: 20px solid black;
+
+}
+
+#content {
+
+	text-align: center;
+	color: red;
+	font-family: 'VT323';
+	font-size: 50px;
+
+}
+
+#message {
+
+	margin: 160px auto;	
+
+}
+
+#question {
+
+	display: none;
+	margin: 130px auto;	
+
+}
+
+#enterName {
+
+	display: none;
+	margin: 0px auto;	
+
+}
+
+#nameInput {
+
+	height: 75px;
+	width: 200px;
+	text-align: center;
+	color: red;
+	font-family: 'VT323';
+	font-size: 50px;
+	display: none;
+	margin: 10px auto;
+	border: none;
+	background-color: black;	
+
+}
+
+#nameInput:focus {
+  
+  outline: none;
+
+}
+
+#boxes {
+
+	clear: both;
+	margin: 0px auto;
+	text-align: center;
+	padding: 20px;
+
+}
+
+/*#board {
+
+	clear: both;
+	background-color: blue;
+	height: 450px;
+	width: 450px;
+	display: block;
+	margin: 20px auto;
+
+}*/	
+
+input {
+
+	font-size: 0px;
+
+}
+
+table {
+
+	border: 1; 
+	width: 100%;
+
+}
+
+/*RED BUTTON STYLE*/
+
+.red {
+
+	background-color: #BB1B1B;
+	border-radius: 200px 0px 0px 0px;
+	border: 20px solid black;
+	height: 200px;
+	width: 200px;
+	padding: 0px;
+	margin-right: -4px;
+	text-align: center;
+
+}
+
+.red:focus {
+  
+  outline: none;
+
+}
+
+@keyframes redFlash {
+    50%  {background-color: #FF0000;}
+}
+
+.redButtonFlash {
+
+	animation-name: redFlash;
+	animation-duration: 0.3s;
+	
+}
+
+/*BLUE BUTTON STYLE*/
+
+.blue {
+
+	background-color: #1B1BBD;
+	border-radius: 0px 0px 0px 200px;
+	border: 20px solid black;
+	height: 200px;
+	width: 200px;
+	padding: 0px;
+	margin-right: -4px;
+	text-align: center;
+
+}
+
+.blue:focus {
+  outline: none;
+}
+
+@keyframes blueFlash {
+    50%  {background-color: #0070FF;}
+}
+
+.blueButtonFlash {
+
+	animation-name: blueFlash;
+	animation-duration: 0.3s;
+	
+}
+
+
+/*GREEN BUTTON STYLE*/
+.green {
+
+	background-color: #0F7D0F;
+	border-radius: 0px 200px 0px 0px;
+	border: 20px solid black;
+	height: 200px;
+	width: 200px;
+	padding: 0px;
+	margin-right: -4px;
+	text-align: center;
+	
+}
+
+.green:focus {
+  outline: none;
+}
+
+@keyframes greenFlash {
+    50%  {background-color: #03E003;}
+}
+
+.greenButtonFlash {
+
+	animation-name: greenFlash;
+	animation-duration: 0.3s;
+	
+}
+
+
+/*YELLOW BUTTON STYLE*/
+.yellow {
+
+	background-color: #B3B31B;
+	border-radius: 0px 0px 200px 0px;
+	border: 20px solid black;
+	height: 200px;
+	width: 200px;
+	padding: 0px;
+	margin-right: -4px;
+	text-align: center;
+
+}
+
+.yellow:focus {
+  outline: none;
+}
+
+@keyframes yellowFlash {
+    50%  {background-color: yellow;}
+}
+
+.yellowButtonFlash {
+
+	animation-name: yellowFlash;
+	animation-duration: 0.3s;
+	
+}
