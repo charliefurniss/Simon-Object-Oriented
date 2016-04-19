@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simon</title>
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="js/soundmanager/script/soundmanager2.js"></script>
+	<script src="js/gameplay.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/simon.css">
+	<link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+	<h2 id="name">name</h2>
+	<h1 id="title">simon</h1>
+	
+	<div id="board">
+		<div id="boxes">
+			<div class="topRow">
+				<input type="button" id="#FF0000" url="audio/redSound.mp3" class="red" value="#BB1B1B">
+				<input type="button" id="#03E003" url="audio/greenSound.mp3" class="green" value="#0F7D0F">
+			</div>
+			<div class="bottomRow">
+				<input type="button" id="#0070FF" url="audio/blueSound.mp3" class="blue" value="#1B1BBD">
+				<input type="button" id="yellow" url="audio/yellowSound.mp3" class="yellow" value="#B3B31B">
+			</div>
+		</div>	
+	</div>	
+	<div id='infoWindow'>
+		<div id="content">
+			<p id="message"></p>
+			<p id="enterName">please enter your name to start</p>
+			<p id="question"></p>
+			<input type="text" id="nameInput" value=""
+			></input>
+		</div>	
+	</div>
+</body>
+</html>
