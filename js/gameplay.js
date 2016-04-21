@@ -20,8 +20,12 @@ $(document).ready(function() {
 		var playerName;
 		var faultSound = ["audio/faster.wav"];
 
-		board.intro();
-		enterPlayerName();
+		startIntro();
+
+		function startIntro(){
+			board.intro();
+			enterPlayerName();
+		}	
 
 		function enterPlayerName(){
 			$(document).keypress(function(e){
@@ -40,14 +44,6 @@ $(document).ready(function() {
 		};
 
 		function setUpGame(){
-			//resets variables needed for gameplay
-			simonButton = "";
-			simonLog = [];
-			playerClick = "";
-			playerClickLog = [];
-			playerClickNumber = 0;
-			round = 1;
-
 			displayPlayerName(playerName);
 			//removes infoWindow
 			$("#infoWindow").css("display", "none");
@@ -64,6 +60,13 @@ $(document).ready(function() {
 		}
 
 		function startGame(){
+			//resets variables needed for gameplay
+			simonButton = "";
+			simonLog = [];
+			playerClick = "";
+			playerClickLog = [];
+			playerClickNumber = 0;
+			round = 1;
 			//after delay shows first computer colour flash
 			setTimeout(function(){
 				simonLog = [];
@@ -229,7 +232,7 @@ $(document).ready(function() {
 					$("#question").slideUp()
 					setTimeout(function(){
 						$("#infoWindow").slideDown();
-						intro();
+						startIntro()
 					}, 2000);
 				}
 				
@@ -237,7 +240,7 @@ $(document).ready(function() {
 					$("#question").slideUp()
 					setTimeout(function(){
 						$("#infoWindow").slideDown();
-						intro();
+						startIntro()
 					}, 2000);	
 				}
 			})

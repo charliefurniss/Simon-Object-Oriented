@@ -7,9 +7,4 @@ var Board = function(){
 		$("#nameInput").slideDown();
 		$("#nameInput").focus();  			//shows infoWindow	
 	}
-
-	this.setUpNameForm = function(){
-		//the following show elements for player to enter name
-		
-	}
 }
