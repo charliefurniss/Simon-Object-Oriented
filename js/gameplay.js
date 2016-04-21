@@ -3,10 +3,13 @@ $(document).ready(function() {
 	soundManager.setup({
 	  url: 'js/soundmanager/swf',
 	  flashVersion: 9,
-	  onready: start
+	  onready: init
 	});
 
-	function start(){
+	function init(){
+
+		var board = new Board();
+
 		var simonButton;						//computer colour choice
 		var simonLog = [];					//log of computer choices
 		var playerClick;						//player choice
@@ -17,20 +20,10 @@ $(document).ready(function() {
 		var playerName;
 		var faultSound = ["audio/faster.wav"];
 
-		intro();
-
-		function intro(){
-			$("#board").css("display", "none");  //moves board out
-			$("#infoWindow").slideDown();  				//shows infoWindow
-			enterPlayerName();	
-		}	
+		board.intro();
+		enterPlayerName();
 
 		function enterPlayerName(){
-			//the following show elements for player to enter name
-			$("#infoWindow").slideDown();
-			$("#enterName").slideDown();
-			$("#nameInput").slideDown();
-			$("#nameInput").focus();
 			$(document).keypress(function(e){
 				//accepts players name and stores into playerName
 				playerName = $("#nameInput").val().toLowerCase();
