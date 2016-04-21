@@ -15,7 +15,6 @@ $(document).ready(function() {
 		var playerClick;						//player choice
 		var playerClickLog = [];		//log of player choices
 		var playerClickNumber = 0;	//counter for assessEachClick()
-
 		var round = 1;
 		var playerName;
 		var faultSound = ["audio/faster.wav"];
@@ -37,69 +36,24 @@ $(document).ready(function() {
 					$("#nameInput").css("display", "none");
 					$("#nameInput").val("");
 					$(document).unbind("keypress");
-					setUpGame();
+					board.setUpGame(playerName);
 					startGame();
 				}	
 			})
 		};
 
-		function setUpGame(){
-			displayPlayerName(playerName);
-			//removes infoWindow
-			$("#infoWindow").css("display", "none");
-			//after delay, shows the game board
-			setTimeout(function(){
-				$("#board").css("display", "block");
-			}, 1000);
-		}
-
-		function displayPlayerName(name){
-			//adds name to h2 tage and the reveals the h2 previsouly hidden h2 tag
-			$("h2").text(name + ": 0");
-			$("h2").slideDown(name + ": 0");
-		}
-
 		function startGame(){
-			//resets variables needed for gameplay
-			simonButton = "";
-			simonLog = [];
-			playerClick = "";
-			playerClickLog = [];
-			playerClickNumber = 0;
-			round = 1;
 			//after delay shows first computer colour flash
 			setTimeout(function(){
-				simonLog = [];
-				console.log(simonLog + " at start");
-  			colourGenerator();
+  			computerTurn();
 	  	}, 2000);	
 		}
 		
-		function colourGenerator(){
-			//stores listeners on each button into variables
-			var redButton = $(".red");
-			var greenButton = $(".green");
-			var blueButton = $(".blue");
-			var yellowButton = $(".yellow");
-			//chooses computer button randomly and assigns it to simonButton
-			var randomNumber = Math.random() * 4;
-			
-			if (randomNumber <= 1) {
-				simonButton = redButton;
-			} else if (randomNumber <= 2) {
-				simonButton = greenButton;
-			} else if (randomNumber <= 3) {
-				simonButton = blueButton;
-			} else {
-				simonButton = yellowButton;
-			}
-
-			//logs computer choice in simonLog array
-			simonLog.push(simonButton.attr('class'));
-			//registers computer choice with a flash and a sound
-			simonFlashSound();
-			//calls player's turn 
-			pClick();
+		function computerTurn(){
+			var simonButton = board.generateSimonButton();
+			simonLog.push(simonButton.attr('class')); //logs computer choice in simonLog array
+			simonFlashSound();												//registers computer choice with a flash and a sound
+			pClick();																	//calls player's turn 
 		};
 
 		function pClick(){
@@ -107,7 +61,6 @@ $(document).ready(function() {
 			$("input").each(function(){
 				$(this).on("click", function(){
 					//when one of these elements is clicked...
-
 					//...switch off the click listener
 					$("input").off("click");
 					//store the choice of click in playerClick variable
@@ -145,12 +98,11 @@ $(document).ready(function() {
 				playerClickLog.length = 0;
 				playerClickNumber = 0;
 				setTimeout(function(){
-					colourGenerator();
+					computerTurn();
 				}, 1000);
 			}
 		}
 
-		///BUG IS IN THIS FUNCTION I THINK
 		function simonFlashSound(){
 			//cycles through the computer log to make the 
 			//correct button flash in the sequence
