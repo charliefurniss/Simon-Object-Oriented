@@ -9,6 +9,7 @@ $(document).ready(function() {
 	function init(){
 
 		var board = new Board();
+		var playerName = "";
 		var simonLog = [];					//log of computer choices
 		var playerClick;						//player choice
 		var playerClickLog = [];		//log of player choices
@@ -26,7 +27,7 @@ $(document).ready(function() {
 		function enterPlayerName(){
 			$(document).keypress(function(e){
 				//accepts players name and stores into playerName
-				var playerName = $("#nameInput").val().toLowerCase();
+				playerName = $("#nameInput").val().toLowerCase();
 				if (e.which == 13) {
 					board.clearNameInputWindow();
 					board.setUpGame(playerName);
@@ -74,14 +75,15 @@ $(document).ready(function() {
 				pClick();
 			} else {
 				board.increasePlayerScore(playerName, round)
-				round++;		//increases round for the player's score				
-				// playerClickLog.length = 0;
+				round++;								//increases round for the player's score				
+				playerClickLog.length = 0;
 				playerClickNumber = 0;
 				computerTurn();
 			}
 		}
 
 		function assessEachClick(){
+			console.log("assess");
 			//compares each player click with its respective computer click, allowing the player to continue if it's correct and stopping the game if not
 			if (playerClickLog[playerClickNumber] == simonLog[playerClickNumber]){	
 				playerTurn();

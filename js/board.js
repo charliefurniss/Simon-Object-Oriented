@@ -65,11 +65,11 @@ var Board = function(){
 			(function(i){
 			  setTimeout(function(){
 			    //flash on       
-		  		$("." + simonLog[i]).css("background-color", $("." + simonLog[i]).attr('id'));
+		  		flashOn(simonLog[i]);
 		  		makeSound($("." + simonLog[i]).attr('url'));
 		  		setTimeout(function(){
 		  			//flash off
-			  		$("." + simonLog[i]).css("background-color", $("." + simonLog[i]).attr('value'));
+			  		flashOff(simonLog[i]);
 			  	}, 300);				  			
 				}, 500 * i);
 			}(i));
@@ -77,12 +77,21 @@ var Board = function(){
 
 		this.registerPlayerClick = function(buttonClass){
 			//flashes and sounds on every player click
-			$("." + buttonClass).css("background-color", $("." + buttonClass).attr('id'));
+			flashOn(buttonClass);
 			makeSound($("." + buttonClass).attr('url'));
 			setTimeout(function(){
-				$("." + buttonClass).css("background-color", $("." + buttonClass).attr('value'));
+				flashOff(buttonClass);
 			}, 300);
 		};
+
+		function flashOn(buttonToFlash){
+			$("." + buttonToFlash).css("background-color", $("." + buttonToFlash).attr('id'));
+
+		}
+
+		function flashOff(buttonToFlash){
+			$("." + buttonToFlash).css("background-color", $("." + buttonToFlash).attr('value'));
+		}
 
 		function makeSound(buttonURL){
 			//plays the relevant sound when called either by the player or the computer
@@ -92,7 +101,7 @@ var Board = function(){
 			mySound.play();
 		};
 
-		this.increasePlayerScore(playerName, round){
+		this.increasePlayerScore = function(playerName, round){
 			$("h2").text(playerName + ": " + (round));
 		}
 
