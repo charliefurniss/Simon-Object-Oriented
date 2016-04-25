@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 		var board = new Board();
 		var player = new Player();
-		var simonLog = [];					//log of computer choices
+		var simon = new Simon();					//log of computer choices
 		var round = 1;
 
 		startIntro();
@@ -40,8 +40,8 @@ $(document).ready(function() {
 			//after delay shows first computer colour flash
 			setTimeout(function(){
 				var simonButton = board.generateSimonButton();
-				simonLog.push(simonButton.attr('class')); //logs computer choice in simonLog array
-				board.simonFlashSound(simonLog);					//registers computer choice with a flash and a sound
+				simon.clickLog.push(simonButton.attr('class')); //logs computer choice in simonLog array
+				board.simonFlashSound(simon.clickLog);					//registers computer choice with a flash and a sound
 				pClick();
 			}, 2000);																		//calls player's turn 
 		};
@@ -66,7 +66,7 @@ $(document).ready(function() {
 
 		function playerTurn(){
 			//triggers the computer's turn once the player has made enough clicks
-			if (player.clickLog.length < simonLog.length) {
+			if (player.clickLog.length < simon.clickLog.length) {
 				player.clickNumber++;
 				pClick();
 			} else {
@@ -81,7 +81,7 @@ $(document).ready(function() {
 		function assessEachClick(){
 			console.log("assess");
 			//compares each player click with its respective computer click, allowing the player to continue if it's correct and stopping the game if not
-			if (player.clickLog[player.clickNumber] == simonLog[player.clickNumber]){	
+			if (player.clickLog[player.clickNumber] == simon.clickLog[player.clickNumber]){	
 				playerTurn();
 			} else {
 				board.alertError();
@@ -90,7 +90,7 @@ $(document).ready(function() {
 		}
 
 		function resetGameVariables(){
-			simonLog = [];
+			simon.clickLog = [];
 			player.click = "";
 			player.clickLog = [];
 			player.clickNumber = 0;
