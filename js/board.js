@@ -9,6 +9,10 @@ var Board = function(){
 		$("#" + id).css("display", "block");
 	}
 
+	function slideDownElement(id) {
+		$("#" + id).slideDown();
+	}
+
 	this.clearNameInputWindow = function(){
 		//on "RETURN" clears the infoWindow, disables keypress and calls setUpGame and startGame
 		hideElement("enterName");
@@ -19,13 +23,13 @@ var Board = function(){
 
 	this.showInfoWindow = function(){
 		hideElement("board");
-		$("#infoWindow").slideDown();
+		slideDownElement("infoWindow");
 	}
 
 	this.intro = function(){
 		this.showInfoWindow();
-		$("#enterName").slideDown();
-		$("#nameInput").slideDown();
+		slideDownElement("enterName");
+		slideDownElement("nameInput");
 		$("#nameInput").focus();  			//shows infoWindow	
 	}
 
