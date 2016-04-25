@@ -15,7 +15,6 @@ $(document).ready(function() {
 		var playerClickLog = [];		//log of player choices
 		var playerClickNumber = 0;	//counter for assessEachClick()
 		var round = 1;
-		var faultSound = ["audio/faster.wav"];
 
 		startIntro();
 
@@ -27,10 +26,10 @@ $(document).ready(function() {
 		function enterPlayerName(){
 			$(document).keypress(function(e){
 				//accepts players name and stores into playerName
-				playerName = $("#nameInput").val().toLowerCase();
+				playerName = $("#nameInput").val();
 				if (e.which == 13) {
 					board.clearNameInputWindow();
-					board.setUpGame(playerName);
+					board.setUpGame(playerName.toLowerCase());
 					startGame();
 				}	
 			})
@@ -74,7 +73,7 @@ $(document).ready(function() {
 				playerClickNumber++;
 				pClick();
 			} else {
-				board.increasePlayerScore(playerName, round)
+				board.increasePlayerScoreDisplay(playerName, round)
 				round++;								//increases round for the player's score				
 				playerClickLog.length = 0;
 				playerClickNumber = 0;

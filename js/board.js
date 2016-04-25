@@ -1,4 +1,3 @@
-console.log("board.js working");
 var Board = function(){
 
 	function hideElement(id){
@@ -16,6 +15,29 @@ var Board = function(){
 	function changeText(id, message){
 		$("#" + id).text(message);
 	}
+
+	function displayPlayerName(name){
+		//adds name to h2 tage and the reveals the h2 previsouly hidden h2 tag
+		$("#name").text(name + ": 0");
+		$("#name").slideDown(name + ": 0");
+	}
+
+	function flashOn(buttonToFlash){
+		$("." + buttonToFlash).css("background-color", $("." + buttonToFlash).attr('id'));
+
+	}
+
+	function flashOff(buttonToFlash){
+		$("." + buttonToFlash).css("background-color", $("." + buttonToFlash).attr('value'));
+	}
+
+	function makeSound(soundURL){
+		//plays the relevant sound when called either by the player or the computer
+		mySound = soundManager.createSound({        
+		  "url": soundURL
+		});
+		mySound.play();
+	};
 
 	this.clearNameInputWindow = function(){
 		//on "RETURN" clears the infoWindow, disables keypress and calls setUpGame and startGame
@@ -47,13 +69,6 @@ var Board = function(){
 		}, 1000);
 	}
 
-	function displayPlayerName(name){
-		//adds name to h2 tage and the reveals the h2 previsouly hidden h2 tag
-		$("h2").text(name + ": 0");
-		$("h2").slideDown(name + ": 0");
-	}
-
-
 	this.generateSimonButton = function(){
 		//chooses computer button randomly and assigns it to simonButton
 		var randomNumber = Math.random() * 4;
@@ -78,7 +93,7 @@ var Board = function(){
 			  setTimeout(function(){
 			    //flash on       
 		  		flashOn(simonLog[i]);
-		  		makeSound($("." + simonLog[i]).attr('url'));
+		  		makeSound($("." + simonLog[i]).attr("url"));
 		  		setTimeout(function(){
 		  			//flash off
 			  		flashOff(simonLog[i]);
@@ -90,46 +105,21 @@ var Board = function(){
 		this.registerPlayerClick = function(buttonClass){
 			//flashes and sounds on every player click
 			flashOn(buttonClass);
-			makeSound($("." + buttonClass).attr('url'));
+			makeSound($("." + buttonClass).attr("url"));
 			setTimeout(function(){
 				flashOff(buttonClass);
 			}, 300);
 		};
 
-		function flashOn(buttonToFlash){
-			$("." + buttonToFlash).css("background-color", $("." + buttonToFlash).attr('id'));
-
-		}
-
-		function flashOff(buttonToFlash){
-			$("." + buttonToFlash).css("background-color", $("." + buttonToFlash).attr('value'));
-		}
-
-		function makeSound(buttonURL){
-			//plays the relevant sound when called either by the player or the computer
-			mySound = soundManager.createSound({        
-			  "url": buttonURL
-			});
-			mySound.play();
-		};
-
-		this.increasePlayerScore = function(playerName, round){
+		this.increasePlayerScoreDisplay = function(playerName, round){
 			$("h2").text(playerName + ": " + (round));
 		}
 
-		this.playErrorSound = function(){
-			//plays error sound when player makes a wrong move
-			eSound = soundManager.createSound({
-			  "url": "audio/errorSound.mp3"
-			});
-			eSound.play();
-		};
-
 		this.alertError = function(){
-			this.playErrorSound();
+			var errorSoundURL = "audio/errorSound.mp3";
+			makeSound(errorSoundURL);
 			// replaces game board with info window
 			this.showInfoWindow();
-
 			changeText("message", "whoops!");
 			setTimeout(function(){
 				$("#message").slideUp(500, function(){
