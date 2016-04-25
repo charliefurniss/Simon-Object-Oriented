@@ -9,11 +9,8 @@ $(document).ready(function() {
 	function init(){
 
 		var board = new Board();
-		var playerName = "";
+		var player = new Player();
 		var simonLog = [];					//log of computer choices
-		var playerClick;						//player choice
-		var playerClickLog = [];		//log of player choices
-		var playerClickNumber = 0;	//counter for assessEachClick()
 		var round = 1;
 
 		startIntro();
@@ -26,10 +23,10 @@ $(document).ready(function() {
 		function enterPlayerName(){
 			$(document).keypress(function(e){
 				//accepts players name and stores into playerName
-				playerName = $("#nameInput").val();
+				player.name = $("#nameInput").val().toLowerCase();
 				if (e.which == 13) {
 					board.clearNameInputWindow();
-					board.setUpGame(playerName.toLowerCase());
+					board.setUpGame(player.name);
 					startGame();
 				}	
 			})
@@ -57,11 +54,11 @@ $(document).ready(function() {
 					//...switch off the click listener
 					$("input").off("click");
 					//store the choice of click in playerClick variable
-					playerClick = $(this);
+					player.click = $(this);
 					//register choice with flash and sound
-					board.registerPlayerClick(playerClick.attr('class'));	
+					board.registerPlayerClick(player.click.attr('class'));	
 					//store player choice in array
-					playerClickLog.push(playerClick.attr('class'));
+					player.clickLog.push(player.click.attr('class'));
 					assessEachClick();
 				})
 			})
@@ -69,14 +66,14 @@ $(document).ready(function() {
 
 		function playerTurn(){
 			//triggers the computer's turn once the player has made enough clicks
-			if (playerClickLog.length < simonLog.length) {
-				playerClickNumber++;
+			if (player.clickLog.length < simonLog.length) {
+				player.clickNumber++;
 				pClick();
 			} else {
-				board.increasePlayerScoreDisplay(playerName, round)
+				board.increasePlayerScoreDisplay(player.name, round)
 				round++;								//increases round for the player's score				
-				playerClickLog.length = 0;
-				playerClickNumber = 0;
+				player.clickLog.length = 0;
+				player.clickNumber = 0;
 				computerTurn();
 			}
 		}
@@ -84,7 +81,7 @@ $(document).ready(function() {
 		function assessEachClick(){
 			console.log("assess");
 			//compares each player click with its respective computer click, allowing the player to continue if it's correct and stopping the game if not
-			if (playerClickLog[playerClickNumber] == simonLog[playerClickNumber]){	
+			if (player.clickLog[player.clickNumber] == simonLog[player.clickNumber]){	
 				playerTurn();
 			} else {
 				board.alertError();
@@ -94,9 +91,9 @@ $(document).ready(function() {
 
 		function resetGameVariables(){
 			simonLog = [];
-			playerClick = "";
-			playerClickLog = [];
-			playerClickNumber = 0;
+			player.click = "";
+			player.clickLog = [];
+			player.clickNumber = 0;
 			round = 1;
 		}
 
