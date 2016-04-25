@@ -13,6 +13,10 @@ var Board = function(){
 		$("#" + id).slideDown();
 	}
 
+	function changeText(id, message){
+		$("#" + id).text(message);
+	}
+
 	this.clearNameInputWindow = function(){
 		//on "RETURN" clears the infoWindow, disables keypress and calls setUpGame and startGame
 		hideElement("enterName");
@@ -126,14 +130,14 @@ var Board = function(){
 			// replaces game board with info window
 			this.showInfoWindow();
 
-			$("#message").text("whoops!");
+			changeText("message", "whoops!");
 			setTimeout(function(){
 				$("#message").slideUp(500, function(){
-					$("#message").text("");
+					changeText("message", "");
 					showElement("message");
 				});
-				$("#question").text("do you want to play again (y/n)?");
-				$("#question").slideDown();
+				changeText("question", "do you want to play again (y/n)?");
+				slideDownElement("question");
 			}, 2000);
 		}
 
