@@ -25,14 +25,14 @@ $(document).ready(function() {
 				//accepts players name and stores into playerName
 				player.name = $("#nameInput").val().toLowerCase();
 				if (e.which == 13) {
-					board.clearNameInputWindow();
-					board.setUpGame(player.name);
 					startGame();
 				}	
 			})
 		};
 
 		function startGame(){
+			board.clearNameInputWindow();
+			board.setUpGame(player.name);
   		simonTurn();	  	
 		}
 		
@@ -42,22 +42,22 @@ $(document).ready(function() {
 				simon.button = board.generateSimonButton();
 				simon.logColour();
 				board.simonFlashSound(simon.clickLog);					//registers computer choice with a flash and a sound
-				pClick();
-			}, 2000);																		//calls player's turn 
+				playerClick();																	//calls player's turn 
+			}, 2000);																		
 		};
 
-		function pClick(){
+		function playerClick(){
 			//sets up listeners on each input element
 			$("input").each(function(){
 				$(this).on("click", function(){
 					//when one of these elements is clicked...
 					//...switch off the click listener
 					$("input").off("click");
-					//store the choice of click in playerClick variable
+					//...store the choice of click in player.click variable
 					player.click = $(this);
-					//register choice with flash and sound
+					//...register choice with flash and sound
 					board.registerPlayerClick(player.click.attr('class'));	
-					//store player choice in array
+					//...store player choice in array
 					player.clickLog.push(player.click.attr('class'));
 					assessEachClick();
 				})
@@ -68,7 +68,7 @@ $(document).ready(function() {
 			//triggers the computer's turn once the player has made enough clicks
 			if (player.clickLog.length < simon.clickLog.length) {
 				player.clickNumber++;
-				pClick();
+				playerClick();
 			} else {
 				board.increasePlayerScoreDisplay(player.name, game.round)
 				game.round++;									//increases round for the player's score				
@@ -84,15 +84,27 @@ $(document).ready(function() {
 			if (player.clickLog[player.clickNumber] == simon.clickLog[player.clickNumber]){	
 				playerTurn();
 			} else {
-				board.alertError();
-				playAgainQuestion();
+				createError();
 			}	
+		}
+
+		function createError(){
+			board.alertError();
+			playAgainQuestion();
 		}
 
 		function resetGameVariables(){
 			player = new Player();
 			simon = new Simon();
 			game = new Game();
+		}
+
+		function repeatGameResetVariables(){
+			simon = new Simon();
+			game = new Game();
+			player.click;				//player choice
+			player.clickLog = [];		//log of player choices
+			player.clickNumber = 0;		//counter for assessEachClick()
 		}
 
 		function restart(){
@@ -106,12 +118,11 @@ $(document).ready(function() {
 		function playAgainQuestion(){
 			$(document).keypress(function(e){
 				if (e.which == 89 || e.which == 121) {
-					// $("#question").text("");
-					// simonLog = [];
-					// setUpGame();
-					// startGame();
+					$("#question").text("");
+					repeatGameResetVariables();					
+					startGame();
 					$("#question").slideUp()
-					restart();
+					// restart();
 				}	else if (e.which == 78 || e.which == 110) {
 					$("#question").slideUp()
 					restart();	
