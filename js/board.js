@@ -1,20 +1,24 @@
 console.log("board.js working");
 var Board = function(){
 
-	function clearWindow(window){
-		$("#" + window).css("display", "none");
+	function hideElement(id){
+		$("#" + id).css("display", "none");
+	}
+
+	function showElement(id){
+		$("#" + id).css("display", "block");
 	}
 
 	this.clearNameInputWindow = function(){
 		//on "RETURN" clears the infoWindow, disables keypress and calls setUpGame and startGame
-		clearWindow("enterName");
-		clearWindow("nameInput");
+		hideElement("enterName");
+		hideElement("nameInput");
 		$("#nameInput").val("");
 		$(document).unbind("keypress");
 	}
 
 	this.showInfoWindow = function(){
-		clearWindow("board");
+		hideElement("board");
 		$("#infoWindow").slideDown();
 	}
 
@@ -28,10 +32,10 @@ var Board = function(){
 	this.setUpGame = function(playerName){
 		displayPlayerName(playerName);
 		//removes infoWindow
-		clearWindow("infoWindow");
+		hideElement("infoWindow");
 		//after delay, shows the game board
 		setTimeout(function(){
-			$("#board").css("display", "block");
+			showElement("board");
 		}, 1000);
 	}
 
@@ -118,12 +122,11 @@ var Board = function(){
 			// replaces game board with info window
 			this.showInfoWindow();
 
-			//asks player if they want to play again, restarting the game if they say "yes" and resetting the game if they say "no"
 			$("#message").text("whoops!");
 			setTimeout(function(){
 				$("#message").slideUp(500, function(){
 					$("#message").text("");
-					$("#message").css("display", "block");
+					showElement("message");
 				});
 				$("#question").text("do you want to play again (y/n)?");
 				$("#question").slideDown();
